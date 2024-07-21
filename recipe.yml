@@ -87,6 +87,12 @@ stages:
       - nautilus-open-any-terminal
       - openssh-askpass
       - yaru-theme
+      - adobe-source-code-pro-fonts
+      - android-tools
+      - cascadia-code-fonts
+      - code
+      - containerd.io
+      - dbus-x11
 
   - name: example-commands # Sample module demonstrating the Shell module with custom commands
     type: shell
