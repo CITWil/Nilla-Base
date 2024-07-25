@@ -69,9 +69,9 @@ stages:
      #- tailscale
       - tmux
      #- usbmuxd
-     #- wireguard-tools
+      - wireguard-tools
      #- xprop
-     #- wl-clipboard
+      - wl-clipboard
      #- zsh
      #- simple-scan
      # - gnome-shell-extension-appindicator
@@ -85,8 +85,8 @@ stages:
      #- libgda-sqlite
      #- libgda
      #- libratbag-ratbagd
-     # - nautilus-kdeconnect
-     # - nautilus-nextcloud
+     #- nautilus-kdeconnect
+      - nautilus-nextcloud
      #- openssh-askpass
      #- yaru-theme
      #- adobe-source-code-pro-fonts
