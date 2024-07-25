@@ -41,7 +41,7 @@ stages:
      #- hplip
      #- krb5-workstation
      #- ifuse
-     # - barrier
+      - barrier
      #- input-remapper
      #- libimobiledevice
      #- libxcrypt-compat
@@ -55,8 +55,8 @@ stages:
      #- pulseaudio-utils
      #- python3-pip
       - rclone
-     #- rclone-browser
-     #- restic
+      - rclone-browser
+      - restic
      #- samba-dcerpc
      #- samba-ldb-ldap-modules
      #- samba-winbind-clients
