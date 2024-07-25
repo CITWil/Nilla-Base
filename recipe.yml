@@ -37,11 +37,11 @@ stages:
      #- fish
      #- firewall-config
      #- foo2zjs
-     - gcc
+      - gcc
      #- hplip
      #- krb5-workstation
      #- ifuse
-     - barrier
+      - barrier
      #- input-remapper
      #- libimobiledevice
      #- libxcrypt-compat
@@ -54,9 +54,9 @@ stages:
      #- printer-driver-brlaser
      #- pulseaudio-utils
      #- python3-pip
-     - rclone
-     - rclone-browser
-     - restic
+      - rclone
+      - rclone-browser
+      - restic
      #- samba-dcerpc
      #- samba-ldb-ldap-modules
      #- samba-winbind-clients
@@ -83,8 +83,8 @@ stages:
      #- libgda-sqlite
      #- libgda
      #- libratbag-ratbagd
-     - nautilus-kdeconnect
-     - nautilus-nextcloud
+      - nautilus-kdeconnect
+      - nautilus-nextcloud
      #- openssh-askpass
      #- yaru-theme
      #- adobe-source-code-pro-fonts
@@ -100,19 +100,19 @@ stages:
      #- ibm-plex-mono-fonts
      #- incus
      #- incus-agent
-     - iotop
+      - iotop
      #- jetbrains-mono-fonts-all
      #- kcli
-     - libvirt-daemon
-     - libvirt-clients-qemu
-     - lxc
-     - lxd-agent
-     - lxd
+      - libvirt-daemon
+      - libvirt-clients-qemu
+      - lxc
+      - lxd-agent
+      - lxd
      #- mozilla-fira-mono-fonts
      #- p7zip-plugins
-     - 7zip
+      - 7zip
      #- powerline-fonts
-     - powertop
+      - powertop
      #- qemu-char-spice
      #- qemu-device-display-virtio-gpu
      #- qemu-device-display-virtio-vga
@@ -121,11 +121,11 @@ stages:
      #- qemu-system-x86-core
      #- qemu-user-binfmt
      #- qemu-user-static
-     - qemu-system
+      - qemu-system
      #- ubuntu-family-fonts
-     - umoci
-     - virt-manager
-     - virt-viewer
+      - umoci
+      - virt-manager
+      - virt-viewer
 
   - name: example-commands # Sample module demonstrating the Shell module with custom commands
     type: shell
