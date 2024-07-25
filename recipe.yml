@@ -85,8 +85,10 @@ stages:
      #- libgda-sqlite
      #- libgda
      #- libratbag-ratbagd
-     #- nautilus-kdeconnect
+      - nautilus-kdeconnect
       - nautilus-nextcloud
+      - linssid
+      - wavemon
      #- openssh-askpass
      #- yaru-theme
      #- adobe-source-code-pro-fonts
