@@ -135,6 +135,7 @@ stages:
      # - umoci
      # - virt-manager
      # - virt-viewer
+       - wireshark
 
   - name: example-modules # Sample module demonstrating importing local and remote modules
     type: includes
