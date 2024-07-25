@@ -37,13 +37,11 @@ stages:
      #- fish
      #- firewall-config
      #- foo2zjs
-     #- gcc
-     #- glow
-     #- gum
+     - gcc
      #- hplip
      #- krb5-workstation
      #- ifuse
-     #- input-leap
+     - barrier
      #- input-remapper
      #- libimobiledevice
      #- libxcrypt-compat
@@ -56,8 +54,9 @@ stages:
      #- printer-driver-brlaser
      #- pulseaudio-utils
      #- python3-pip
-     #- rclone
-     #- restic
+     - rclone
+     - rclone-browser
+     - restic
      #- samba-dcerpc
      #- samba-ldb-ldap-modules
      #- samba-winbind-clients
@@ -76,20 +75,22 @@ stages:
       - gnome-shell-extension-appindicator
       - gnome-shell-extension-blur-my-shell
       - gnome-shell-extension-caffeine
-      - gnome-shell-extension-dash-to-dock
+      - gnome-shell-extension-dashtodock
       - gnome-shell-extension-gsconnect
      #- gnome-shell-extension-logo-menu
-      - gnome-shell-extension-search-light
+     #- gnome-shell-extension-search-light
      #- gnome-shell-extension-tailscale-gnome-qs
      #- libgda-sqlite
      #- libgda
      #- libratbag-ratbagd
-     #- nautilus-gsconnect
-     #- nautilus-open-any-terminal
+     - nautilus-kdeconnect
+     - nautilus-nextcloud
      #- openssh-askpass
      #- yaru-theme
-      - adobe-source-code-pro-fonts
-      - android-tools
+     #- adobe-source-code-pro-fonts
+      - android-sdk-platform-tools
+      - adb
+      - fastboot
      #- cascadia-code-fonts
      #- code
      #- containerd.io
@@ -99,18 +100,19 @@ stages:
      #- ibm-plex-mono-fonts
      #- incus
      #- incus-agent
-     #- iotop
+     - iotop
      #- jetbrains-mono-fonts-all
      #- kcli
-     #- libvirt
-     #- lxc
-     #- lxd-agent
-     #- lxd
+     - libvirt-daemon
+     - libvirt-clients-qemu
+     - lxc
+     - lxd-agent
+     - lxd
      #- mozilla-fira-mono-fonts
      #- p7zip-plugins
-     #- p7zip
+     - 7zip
      #- powerline-fonts
-     #- powertop
+     - powertop
      #- qemu-char-spice
      #- qemu-device-display-virtio-gpu
      #- qemu-device-display-virtio-vga
@@ -119,14 +121,11 @@ stages:
      #- qemu-system-x86-core
      #- qemu-user-binfmt
      #- qemu-user-static
-     #- qemu
-     #- rocm-hip
-     #- rocm-opencl
+     - qemu-system
      #- ubuntu-family-fonts
-     #- udica
-     #- umoci
-     #- virt-manager
-     #- virt-viewer
+     - umoci
+     - virt-manager
+     - virt-viewer
 
   - name: example-commands # Sample module demonstrating the Shell module with custom commands
     type: shell
