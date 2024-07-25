@@ -27,10 +27,11 @@ stages:
     type: apt
     source:
       packages:
+      - broadcom-sta-dkms
       - bash-color-prompt
       - bcache-tools
       - evtest
-      - epson-inkjet-printer-escpr",
+      - epson-inkjet-printer-escpr
       - epson-inkjet-printer-escpr2
       - fastfetch
       - fish
@@ -93,19 +94,19 @@ stages:
       - code
       - containerd.io
       - dbus-x11
-      - google-droid-sans-mono-fonts",
-      - google-go-mono-fonts",
-      - ibm-plex-mono-fonts",
-      - incus",
-      - incus-agent",
-      - iotop",
-      - jetbrains-mono-fonts-all",
-      - kcli",
-      - libvirt",
-      - lxc",
-      - lxd-agent",
-      - lxd",
-      - mozilla-fira-mono-fonts",
+      - google-droid-sans-mono-fonts
+      - google-go-mono-fonts
+      - ibm-plex-mono-fonts
+      - incus
+      - incus-agent
+      - iotop
+      - jetbrains-mono-fonts-all
+      - kcli
+      - libvirt
+      - lxc
+      - lxd-agent
+      - lxd
+      - mozilla-fira-mono-fonts
       - p7zip-plugins
       - p7zip
       - powerline-fonts
