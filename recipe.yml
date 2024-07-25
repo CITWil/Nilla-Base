@@ -23,13 +23,6 @@ stages:
 
   # Put your custom actions behind this comment
 
-  - name: example-commands # Sample module demonstrating the Shell module with custom commands
-    type: shell
-    commands:
-    - wget -O - https://www.kismetwireless.net/repos/kismet-release.gpg.key --quiet | gpg --dearmor | sudo tee /usr/share/keyrings/kismet-archive-keyring.gpg >/dev/null
-    - echo 'deb [signed-by=/usr/share/keyrings/kismet-archive-keyring.gpg] https://www.kismetwireless.net/repos/apt/release/bookworm bookworm main' | sudo tee /etc/apt/sources.list.d/kismet.list >/dev/null
-    - sudo apt update
-
   - name: Blue-packages # Sample module using the built-in Apt module to install packages
     type: apt
     source:
@@ -47,10 +40,10 @@ stages:
      #- firewall-config
      #- foo2zjs
       - gcc
+      - gpg
      #- hplip
      #- krb5-workstation
      #- ifuse
-      - kismet
      #- input-remapper
      #- libimobiledevice
      #- libxcrypt-compat
