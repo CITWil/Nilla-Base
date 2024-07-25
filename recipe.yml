@@ -27,6 +27,7 @@ stages:
     type: apt
     source:
       packages:
+      - aqemu
       - broadcom-sta-dkms
      #- bash-color-prompt
      #- bcache-tools
