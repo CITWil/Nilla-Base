@@ -92,7 +92,7 @@ stages:
      #- openssh-askpass
      #- yaru-theme
      #- adobe-source-code-pro-fonts
-      - android-sdk-platform-tools
+     #- android-sdk-platform-tools
      # - adb
      # - fastboot
      #- cascadia-code-fonts
@@ -104,7 +104,7 @@ stages:
      #- ibm-plex-mono-fonts
      #- incus
      #- incus-agent
-     #- iotop
+      - iotop
      #- jetbrains-mono-fonts-all
      #- kcli
      #- libvirt-daemon
@@ -117,7 +117,7 @@ stages:
       - 7zip
       - wireshark
      #- powerline-fonts
-     # - powertop
+      - powertop
      #- qemu-char-spice
      #- qemu-device-display-virtio-gpu
      #- qemu-device-display-virtio-vga
