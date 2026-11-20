@@ -1,46 +1,32 @@
-# vib
-name: Nilla OS # Replace this name with your image name
-id: nilla # Replace this ID with your image ID
+---
+name: Nilla OS
+id: nilla
 stages:
-- id: build
-  base: ghcr.io/vanilla-os/core:latest # Optionally, Replace this image URL with a different one i.e. nvidia:main, etc
-  singlelayer: false
-  labels:
-    maintainer: self-maintained # Optionally, Replace this with your name
-  args:
-    DEBIAN_FRONTEND: noninteractive # Set the image environment as non-interactive
-  
-  # Commands to run first before building the modules
-  runs:
-    commands:
-      - echo 'APT::Install-Recommends "1";' > /etc/apt/apt.conf.d/01norecommends
-
-  modules:
-  - name: init-setup
-    type: shell
-    commands:
-    - lpkg --unlock
-    - apt-get update
-
-  # Put your custom actions behind this comment
-
-      #
-      # Networking
-      #
-
+  - id: build
+    base: ghcr.io/vanilla-os/core:latest
+    singlelayer: false
+    labels:
+      maintainer: self-maintained
+    args:
+      DEBIAN_FRONTEND: noninteractive
+    runs:
+      commands:
+        - echo 'APT::Install-Recommends "1";' >
+          /etc/apt/apt.conf.d/01norecommends
+    modules:
+      - name: init-setup
+        type: shell
+        commands:
+          - lpkg --unlock
+          - apt-get update
       - name: networking
         type: apt
-        source:
-          packages:
-            - tailscale
-            - wireguard-tools
-            - openvpn3-client
-            - network-manager-openvpn
-
-      #
-      # Backup & Synchronization
-      #
-
+        source: null
+        packages:
+          - tailscale
+          - wireguard-tools
+          - openvpn3-client
+          - network-manager-openvpn
       - name: backup
         type: apt
         source:
@@ -48,11 +34,6 @@ stages:
             - restic
             - rclone
             - rclone-browser
-
-      #
-      # Terminal / Productivity
-      #
-
       - name: terminal-tools
         type: apt
         source:
@@ -60,11 +41,6 @@ stages:
             - fastfetch
             - wl-clipboard
             - gpg
-
-      #
-      # Diagnostics
-      #
-
       - name: diagnostics
         type: apt
         source:
@@ -74,24 +50,17 @@ stages:
             - linssid
             - iotop
             - powertop
-
-
-      #
-      # COSMIC Repository
-      #
-
       - name: cosmic-repo
         type: shell
         commands:
           - mkdir -p /etc/apt/keyrings
-          - curl -fsSL https://lcheylus.github.io/cosmic-debian/gpg.key -o /etc/apt/keyrings/cosmic-debian-keyring.asc
-          - echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/cosmic-debian-keyring.asc] https://lcheylus.github.io/cosmic-debian/ forky main" > /etc/apt/sources.list.d/cosmic-debian.list
+          - curl -fsSL https://lcheylus.github.io/cosmic-debian/gpg.key -o
+            /etc/apt/keyrings/cosmic-debian-keyring.asc
+          - echo "deb [arch=amd64
+            signed-by=/etc/apt/keyrings/cosmic-debian-keyring.asc]
+            https://lcheylus.github.io/cosmic-debian/ forky main" >
+            /etc/apt/sources.list.d/cosmic-debian.list
           - apt-get update
-
-      #
-      # COSMIC Desktop
-      #
-
       - name: cosmic
         type: apt
         source:
@@ -101,50 +70,39 @@ stages:
             - cosmic-term
             - cosmic-store
             - gnome-keyring
-
-      #
-      # Optional KDE Connect
-      #
-
       - name: connectivity
         type: apt
         source:
           packages:
             - nautilus-kdeconnect
             - nautilus-nextcloud
-
-  # Put your custom actions before this comment
-
-  - name: set-image-name-abroot
-    type: includes
-    includes:
-      - modules/80-set-image-abroot-config.yml
-
-  - name: cleanup
-    type: shell
-    commands:
-    - apt-get autoremove -y
-    - apt-get clean
-    - lpkg --lock
-
-  - name: fsguard
-    type: fsguard
-    CustomFsGuard: false
-    FsGuardLocation: "/usr/sbin/FsGuard"
-    GenerateKey: true
-    FilelistPaths: ["/usr/bin"]
-    modules:
-      - name: remove-prev-fsguard
+      - name: set-image-name-abroot
+        type: includes
+        includes:
+          - modules/80-set-image-abroot-config.yml
+      - name: cleanup
         type: shell
         commands:
-          - rm -rf /FsGuard 
-          - rm -f ./minisign.pub ./minisign.key 
-          - chmod +x /usr/sbin/init
-
-  - name: cleanup2
-    type: shell
-    commands:
-      - rm -rf /tmp/*
-      - rm -rf /var/tmp/*
-      - rm -rf /sources
-      
+          - apt-get autoremove -y
+          - apt-get clean
+          - lpkg --lock
+      - name: fsguard
+        type: fsguard
+        CustomFsGuard: false
+        FsGuardLocation: /usr/sbin/FsGuard
+        GenerateKey: true
+        FilelistPaths:
+          - /usr/bin
+        modules:
+          - name: remove-prev-fsguard
+            type: shell
+            commands:
+              - rm -rf /FsGuard
+              - rm -f ./minisign.pub ./minisign.key
+              - chmod +x /usr/sbin/init
+      - name: cleanup2
+        type: shell
+        commands:
+          - rm -rf /tmp/*
+          - rm -rf /var/tmp/*
+          - rm -rf /sources
