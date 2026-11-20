@@ -1,0 +1,169 @@
+name: Nilla OS
+id: nilla
+
+stages:
+  - id: build
+
+    base: ghcr.io/vanilla-os/core:latest
+
+    singlelayer: false
+    addincludes: true
+
+    labels:
+      maintainer: ME
+
+    args:
+      DEBIAN_FRONTEND: noninteractive
+
+    runs:
+      commands:
+        - echo 'APT::Install-Recommends "1";' > /etc/apt/apt.conf.d/01recommends
+
+    modules:
+
+      #
+      # Initialization
+      #
+
+      - name: init
+        type: shell
+        commands:
+          - lpkg --unlock
+          - apt-get update
+
+      #
+      # Networking
+      #
+
+      - name: networking
+        type: apt
+        source:
+          packages:
+            - tailscale
+            - wireguard-tools
+            - openvpn3-client
+            - network-manager-openvpn
+
+      #
+      # Backup & Synchronization
+      #
+
+      - name: backup
+        type: apt
+        source:
+          packages:
+            - restic
+            - rclone
+            - rclone-browser
+
+      #
+      # Terminal / Productivity
+      #
+
+      - name: terminal-tools
+        type: apt
+        source:
+          packages:
+            - tmux
+            - fastfetch
+            - wl-clipboard
+            - gpg
+
+      #
+      # Diagnostics
+      #
+
+      - name: diagnostics
+        type: apt
+        source:
+          packages:
+            - wireshark
+            - wavemon
+            - linssid
+            - iotop
+            - powertop
+
+
+      #
+      # COSMIC Repository
+      #
+
+      - name: cosmic-repo
+        type: shell
+        commands:
+          - mkdir -p /etc/apt/keyrings
+          - curl -fsSL https://lcheylus.github.io/cosmic-debian/gpg.key -o /etc/apt/keyrings/cosmic-debian-keyring.asc
+          - echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/cosmic-debian-keyring.asc] https://lcheylus.github.io/cosmic-debian/ forky main" > /etc/apt/sources.list.d/cosmic-debian.list
+          - apt-get update
+
+      #
+      # COSMIC Desktop
+      #
+
+      - name: cosmic
+        type: apt
+        source:
+          packages:
+            - cosmic-session
+            - cosmic-files
+            - cosmic-term
+            - cosmic-store
+            - gnome-keyring
+
+      #
+      # Optional KDE Connect
+      #
+
+      - name: connectivity
+        type: apt
+        source:
+          packages:
+            - nautilus-kdeconnect
+            - nautilus-nextcloud
+
+      #
+      # Vanilla Configuration
+      #
+
+      - name: set-image-name-abroot
+        type: includes
+        includes:
+          - modules/80-set-image-abroot-config.yml
+
+      #
+      # Cleanup
+      #
+
+      - name: cleanup
+        type: shell
+        commands:
+          - apt-get autoremove -y
+          - apt-get clean
+          - rm -rf /var/lib/apt/lists/*
+          - lpkg --lock
+
+  - id: fsguard
+
+    type: fsguard
+
+    CustomFsGuard: false
+    FsGuardLocation: "/usr/sbin/FsGuard"
+    GenerateKey: true
+    FilelistPaths:
+      - /usr/bin
+
+    modules:
+
+      - name: cleanup-fsguard
+        type: shell
+        commands:
+          - rm -rf /FsGuard
+          - rm -f ./minisign.pub ./minisign.key
+          - chmod +x /usr/sbin/init
+
+      - name: final-cleanup
+        type: shell
+        commands:
+          - rm -rf /tmp/*
+          - rm -rf /var/tmp/*
+          - rm -rf /sources
