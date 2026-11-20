@@ -3,18 +3,13 @@ id: nilla
 
 stages:
   - id: build
-
     base: ghcr.io/vanilla-os/core:latest
-
     singlelayer: false
     addincludes: true
-
     labels:
       maintainer: ME
-
     args:
       DEBIAN_FRONTEND: noninteractive
-
     runs:
       commands:
         - echo 'APT::Install-Recommends "1";' > /etc/apt/apt.conf.d/01recommends
